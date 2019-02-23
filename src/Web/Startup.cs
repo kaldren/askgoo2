@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ApplicationDbContext = AskGoo2.Infrastructure.Data.ApplicationDbContext;
 
 namespace AskGoo2.Web
 {
@@ -35,9 +36,10 @@ namespace AskGoo2.Web
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDefaultIdentity<AppIdentityDbContext>()
+            services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+                .AddEntityFrameworkStores<AppIdentityDbContext>()
+                    .AddDefaultTokenProviders();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
