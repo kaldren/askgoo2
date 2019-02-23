@@ -2,6 +2,9 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/.vs/AskGoo2/v15
+/.vs/*
 /src/Infrastructure/bin/Debug/netstandard2.0
 /src/Infrastructure/obj/*
+/src/Web/bin/*
+/src/Web/bin/Debug/*
+/src/Web/obj/*
