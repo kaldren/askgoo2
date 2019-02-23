@@ -36,7 +36,7 @@ namespace AskGoo2.Web
             //    options.UseSqlServer(
             //        Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDbContext<ApplicationDbContext>(options => options.UseInMemoryDatabase("InMemoryDb"));
+            services.AddDbContext<AppIdentityDbContext>(options => options.UseInMemoryDatabase("Identity"));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
