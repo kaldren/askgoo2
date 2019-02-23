@@ -3,3 +3,5 @@
 ################################################################################
 
 /.vs/AskGoo2/v15
+/src/Infrastructure/bin/Debug/netstandard2.0
+/src/Infrastructure/obj/*
