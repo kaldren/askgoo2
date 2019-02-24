@@ -8,3 +8,16 @@
 /src/Web/bin/*
 /src/Web/bin/Debug/*
 /src/Web/obj/*
+/Blazor
+/src/ApplicationCore/obj*
+/src/ApplicationCore/bin/Debug/netstandard2.0
+/bin/*
+/obj/*
+/tests/FunctionalTests/obj/*
+/tests/FunctionalTests/bin/*
+
+/tests/IntegrationTests/obj/*
+/tests/IntegrationTests/bin/*
+
+/tests/UnitTests/obj/*
+/tests/UnitTests/bin/*
