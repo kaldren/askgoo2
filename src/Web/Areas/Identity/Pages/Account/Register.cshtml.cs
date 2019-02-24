@@ -84,7 +84,9 @@ namespace AskGoo2.Web.Areas.Identity.Pages.Account
                     Email = Input.Email
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
+
                 await _userManager.AddClaimAsync(user, new Claim("FullName", $"{user.FirstName} {user.LastName}"));
+
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
