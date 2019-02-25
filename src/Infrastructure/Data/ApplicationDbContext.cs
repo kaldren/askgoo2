@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using AskGoo2.Infrastructure.Identity;
+using AskGoo2.ApplicationCore.Entities.QuestionAggregate;
 
 namespace AskGoo2.Infrastructure.Data
 {
@@ -12,5 +13,7 @@ namespace AskGoo2.Infrastructure.Data
             : base(options)
         {
         }
+
+        public DbSet<Question> Questions { get; set; }
     }
 }
