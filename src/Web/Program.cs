@@ -1,4 +1,5 @@
 ﻿using System;
+using AskGoo2.Infrastructure.Data;
 using AskGoo2.Infrastructure.Identity;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
@@ -22,6 +23,9 @@ namespace AskGoo2.Web
                 {
                     var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
                     AppIdentityDbContextSeed.SeedAsync(userManager).Wait();
+
+                    var dbContext = services.GetRequiredService<ApplicationDbContext>();
+                    ApplicationDbContextSeed.SeedAsync(dbContext).Wait();
                 }
                 catch (Exception e)
                 {
