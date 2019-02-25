@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,6 +25,8 @@ namespace AskGoo2.Infrastructure.Identity
                     .HasForeignKey(uc => uc.UserId)
                     .IsRequired();
             });
+
+            builder.Entity<IdentityUser>(b => b.ToTable("Users"));
         }
     }
 }
