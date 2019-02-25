@@ -11,5 +11,7 @@ namespace AskGoo2.Infrastructure.Identity
         public string FirstName { get; set; }
         [PersonalData]
         public string LastName { get; set; }
+
+        public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }
     }
 }
