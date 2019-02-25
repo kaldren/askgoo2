@@ -19,8 +19,20 @@ namespace AskGoo2.Infrastructure.Identity
                 Email = "drenski666@gmail.com"
             };
 
+
+            var defaultUser2 = new ApplicationUser
+            {
+                FirstName = "Bill",
+                LastName = "Gates",
+                UserName = "bill@microsoft.com",
+                Email = "bilL@microsoft.com"
+            };
+
             await userManager.CreateAsync(defaultUser, "Parola123-");
             await userManager.AddClaimAsync(defaultUser, new Claim("FullName", $"{defaultUser.FirstName} {defaultUser.LastName}"));
+
+            await userManager.CreateAsync(defaultUser2, "Parola123-");
+            await userManager.AddClaimAsync(defaultUser2, new Claim("FullName", $"{defaultUser2.FirstName} {defaultUser2.LastName}"));
         }
     }
 }
