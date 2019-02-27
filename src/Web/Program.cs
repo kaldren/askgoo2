@@ -20,6 +20,7 @@ namespace AskGoo2.Web
 
             var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
+            // Seed InMemory when in Development
             if (environment == EnvironmentName.Development)
             {
                 using (var scope = host.Services.CreateScope())
