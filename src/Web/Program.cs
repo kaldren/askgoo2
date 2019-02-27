@@ -16,6 +16,7 @@ namespace AskGoo2.Web
         public static void Main(string[] args)
         {
             var host = CreateWebHostBuilder(args).Build();
+            var logger = host.Services.GetRequiredService<ILogger<Program>>();
 
             var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
@@ -29,9 +30,12 @@ namespace AskGoo2.Web
                     {
                         var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
                         AppIdentityDbContextSeed.SeedAsync(userManager).Wait();
+                        logger.LogInformation("Log Message: Seeding AppIdentityDbContext");
 
                         var dbContext = services.GetRequiredService<ApplicationDbContext>();
                         ApplicationDbContextSeed.SeedAsync(dbContext).Wait();
+                        logger.LogInformation("Log Message: Seeding ApplicationDbContextSeed");
+
                     }
                     catch (Exception e)
                     {
