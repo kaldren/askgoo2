@@ -11,26 +11,33 @@ namespace AskGoo2.Web
 {
     public class Program
     {
+        private IHostingEnvironment CurrentEnvironment { get; set; }
+
         public static void Main(string[] args)
         {
             var host = CreateWebHostBuilder(args).Build();
 
-            using (var scope = host.Services.CreateScope())
+            var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+
+            if (environment == EnvironmentName.Development)
             {
-                var services = scope.ServiceProvider;
-
-                try
+                using (var scope = host.Services.CreateScope())
                 {
-                    var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
-                    AppIdentityDbContextSeed.SeedAsync(userManager).Wait();
+                    var services = scope.ServiceProvider;
 
-                    var dbContext = services.GetRequiredService<ApplicationDbContext>();
-                    ApplicationDbContextSeed.SeedAsync(dbContext).Wait();
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                    throw;
+                    try
+                    {
+                        var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
+                        AppIdentityDbContextSeed.SeedAsync(userManager).Wait();
+
+                        var dbContext = services.GetRequiredService<ApplicationDbContext>();
+                        ApplicationDbContextSeed.SeedAsync(dbContext).Wait();
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                        throw;
+                    }
                 }
             }
 
