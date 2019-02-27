@@ -32,7 +32,8 @@ namespace AskGoo2.Infrastructure.Identity
             foreach (var defaultUser in defaultUsersList)
             {
                 await userManager.CreateAsync(defaultUser, "FakePwd123-");
-                await userManager.AddClaimAsync(defaultUser, new Claim("FullName", $"{defaultUser.FirstName} {defaultUser.LastName}"));
+                await userManager.AddClaimAsync(defaultUser, 
+                    new Claim("FullName", $"{defaultUser.FirstName} {defaultUser.LastName}"));
             }
         }
     }

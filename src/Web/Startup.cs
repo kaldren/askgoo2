@@ -14,9 +14,12 @@ namespace AskGoo2.Web
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private IHostingEnvironment CurrentEnvironment { get; set; }
+
+        public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
             Configuration = configuration;
+            CurrentEnvironment = env;
         }
 
         public IConfiguration Configuration { get; }
@@ -31,12 +34,12 @@ namespace AskGoo2.Web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            //services.AddDbContext<ApplicationDbContext>(options =>
-            //    options.UseSqlServer(
-            //        Configuration.GetConnectionString("DefaultConnection")));
-
-            services.AddDbContext<AppIdentityDbContext>(options => options.UseInMemoryDatabase("Identity"));
-            services.AddDbContext<ApplicationDbContext>(options => options.UseInMemoryDatabase("ApplicationDbContext"));
+            // Use InMemory in Development
+            if (CurrentEnvironment.IsDevelopment())
+            {
+                services.AddDbContext<AppIdentityDbContext>(options => options.UseInMemoryDatabase("Identity"));
+                services.AddDbContext<ApplicationDbContext>(options => options.UseInMemoryDatabase("ApplicationDbContext"));
+            }
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
