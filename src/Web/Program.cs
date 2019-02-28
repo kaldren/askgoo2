@@ -1,6 +1,7 @@
 ﻿using System;
 using AskGoo2.Infrastructure.Data;
 using AskGoo2.Infrastructure.Identity;
+using AskGoo2.Web.Exceptions;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -38,9 +39,9 @@ namespace AskGoo2.Web
                         logger.LogInformation("Log Message: Seeding ApplicationDbContextSeed");
 
                     }
-                    catch (Exception e)
+                    catch (FailedInMemorySeedException)
                     {
-                        Console.WriteLine(e);
+                        logger.LogError($"InMemory database seeding failed. at {DateTime.Now}.");
                         throw;
                     }
                 }
