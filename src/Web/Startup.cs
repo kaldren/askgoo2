@@ -35,19 +35,19 @@ namespace AskGoo2.Web
             });
 
             // Use InMemory in Development
-            //if (CurrentEnvironment.IsDevelopment())
-            //{
-            //    services.AddDbContext<AppIdentityDbContext>(options => 
-            //        options.UseInMemoryDatabase("Identity"));
-            //}
-            //else
-            //{
+            if (CurrentEnvironment.IsDevelopment())
+            {
+                services.AddDbContext<AppIdentityDbContext>(options =>
+                    options.UseInMemoryDatabase("Identity"));
+            }
+            else
+            {
                 services.AddDbContext<AppIdentityDbContext>(options => 
                     options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), 
                         b => b.MigrationsAssembly(typeof(Startup).Assembly.FullName)));
-            //}
+            }
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
+        services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<AppIdentityDbContext>()
                     .AddDefaultTokenProviders();
